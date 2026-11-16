@@ -1,4 +1,8 @@
 -- Application creates this baseline through SQLAlchemy metadata in src/models/entities.py.
 -- Natural keys: users.email, experiments.code, events(experiment_id,user_key,kind).
 -- Foreign keys connect events and decisions to experiment definitions.
--- Decisions.snapshot stores the frozen experimental protocol and event set.
+-- Decisions.snapshot stores the frozen experimental protocol and event set;
+-- roster experiments additionally freeze the locked roster members and reconciliation.
+-- Roster natural keys: roster_versions(experiment_id, version_no | import_key | checksum),
+-- roster_members(roster_version_id, user_key), staged_events(experiment_id, user_key, kind).
+-- experiments.denominator defaults to 'exposure'; existing rows keep exposure statistics.
